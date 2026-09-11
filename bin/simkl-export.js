@@ -4,7 +4,13 @@ import { Command } from 'commander';
 import pc from 'picocolors';
 import { ENV_PATH, APP_VERSION } from '../src/config.js';
 import { AppError } from '../src/errors.js';
+import { TYPES, STATUSES } from '../src/library.js';
+import { makeListParser } from '../src/exportOptions.js';
 import { login } from '../src/commands/login.js';
+import { exportCommand } from '../src/commands/export.js';
+
+const parseTypes = makeListParser(TYPES, { singular: 'type', plural: 'types' });
+const parseStatuses = makeListParser(STATUSES, { singular: 'status', plural: 'statuses' });
 
 try {
   process.loadEnvFile(ENV_PATH);
@@ -29,15 +35,15 @@ program
 program
   .command('export')
   .description('Export your movies, shows and anime to CSV files')
-  .option('--types <list>', 'Comma-separated types: movies,shows,anime')
+  .option('--types <list>', 'Comma-separated types: movies,shows,anime', parseTypes)
   .option(
     '--status <list>',
     'Comma-separated statuses: watching,plantowatch,hold,dropped,completed',
+    parseStatuses,
   )
   .option(
     '--out <dir>',
     'Base folder for the export. A dated subfolder is created inside.',
-    './export',
   )
   .addHelpText(
     'after',
@@ -47,8 +53,8 @@ Examples:
   $ simkl-export export --types anime
   $ simkl-export export --status completed,watching --out ~/backups/simkl`,
   )
-  .action(() => {
-    console.log('Not implemented yet.');
+  .action(async (options) => {
+    await exportCommand(options);
   });
 
 program.addHelpText(
