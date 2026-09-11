@@ -1,0 +1,24 @@
+{
+  "name": "simkl-export",
+  "version": "0.1.0",
+  "description": "Export your Simkl library (movies, shows, anime) to CSV files.",
+  "type": "module",
+  "license": "ISC",
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "simkl-export": "bin/simkl-export.js"
+  },
+  "scripts": {
+    "start": "node bin/simkl-export.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^8.7.2",
+    "commander": "^15.0.0",
+    "csv-stringify": "^6.8.3",
+    "ora": "^9.4.1",
+    "picocolors": "^1.1.1"
+  }
+}

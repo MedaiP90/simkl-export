@@ -10,6 +10,7 @@ Project setup in progress. No features implemented yet.
 
 ```bash
 npm install
+node bin/simkl-export.js --help
 ```
 
 ## License
