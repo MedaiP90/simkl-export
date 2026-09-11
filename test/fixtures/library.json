@@ -1,0 +1,96 @@
+{
+  "movies": [
+    {
+      "status": "completed",
+      "last_watched_at": "2024-05-01T10:00:00Z",
+      "added_to_watchlist_at": "2024-04-01T09:00:00Z",
+      "movie": {
+        "title": "Sample Movie One",
+        "year": 2020,
+        "ids": { "simkl": 101, "imdb": "tt1000001", "tmdb": 2000001 }
+      }
+    },
+    {
+      "status": "plantowatch",
+      "last_watched_at": null,
+      "added_to_watchlist_at": "2024-06-01T09:00:00Z",
+      "movie": {
+        "title": "Sample Movie Two",
+        "year": 2021,
+        "ids": { "simkl": 102, "imdb": "tt1000002" }
+      }
+    }
+  ],
+  "shows": [
+    {
+      "status": "completed",
+      "last_watched_at": "2024-05-10T20:00:00Z",
+      "added_to_watchlist_at": "2024-01-01T08:00:00Z",
+      "show": {
+        "title": "Sample Show One",
+        "year": 2019,
+        "ids": { "simkl": 201, "imdb": "tt2000001", "tmdb": 3000001, "tvdb": 400001 }
+      },
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            { "number": 1, "watched_at": "2024-01-05T18:00:00Z" },
+            { "number": 2, "watched_at": "2024-01-12T18:00:00Z" }
+          ]
+        },
+        {
+          "number": 2,
+          "episodes": [
+            { "number": 1, "watched_at": "2024-02-05T18:00:00Z" },
+            { "number": 2, "watched_at": "2024-02-12T18:00:00Z" }
+          ]
+        }
+      ]
+    },
+    {
+      "status": "plantowatch",
+      "last_watched_at": null,
+      "added_to_watchlist_at": "2024-07-01T09:00:00Z",
+      "show": {
+        "title": "Sample Show Two",
+        "year": 2022,
+        "ids": { "simkl": 202 }
+      }
+    }
+  ],
+  "anime": [
+    {
+      "status": "completed",
+      "anime_type": "tv",
+      "last_watched_at": "2024-03-20T21:00:00Z",
+      "added_to_watchlist_at": "2024-02-01T09:00:00Z",
+      "show": {
+        "title": "Sample Anime One",
+        "year": 2018,
+        "ids": { "simkl": 301, "mal": 5001, "imdb": "tt3000001" }
+      },
+      "seasons": [
+        {
+          "number": 1,
+          "episodes": [
+            { "number": 1, "watched_at": "2024-03-01T12:00:00Z" },
+            { "number": 2, "watched_at": "2024-03-08T12:00:00Z" },
+            { "number": 3, "watched_at": "2024-03-15T12:00:00Z" }
+          ]
+        }
+      ]
+    },
+    {
+      "status": "completed",
+      "anime_type": "movie",
+      "last_watched_at": "2024-04-15T15:00:00Z",
+      "added_to_watchlist_at": "2024-04-01T09:00:00Z",
+      "show": {
+        "title": "Sample Anime Movie",
+        "year": 2017,
+        "ids": { "simkl": 302, "anidb": 6001, "anilist": 7001, "kitsu": 8001 }
+      }
+    }
+  ]
+}
