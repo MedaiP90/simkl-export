@@ -1,28 +1,22 @@
 #!/usr/bin/env node
 
-import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
 import { Command } from 'commander';
-
-const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+import pc from 'picocolors';
+import { ENV_PATH, APP_VERSION } from '../src/config.js';
+import { AppError } from '../src/errors.js';
 
 try {
-  process.loadEnvFile(path.join(projectRoot, '.env'));
+  process.loadEnvFile(ENV_PATH);
 } catch {
   // No .env file yet, continue with process.env as is.
 }
-
-const packageJson = JSON.parse(
-  readFileSync(path.join(projectRoot, 'package.json'), 'utf8'),
-);
 
 const program = new Command();
 
 program
   .name('simkl-export')
   .description("Export your Simkl library (movies, shows, anime) to CSV files.")
-  .version(packageJson.version);
+  .version(APP_VERSION);
 
 program
   .command('login')
@@ -67,4 +61,20 @@ Examples:
 
 program.showHelpAfterError('Run "simkl-export --help" to see the commands.');
 
-program.parse();
+try {
+  await program.parseAsync();
+} catch (err) {
+  if (err instanceof AppError) {
+    console.error(pc.red(`✖ ${err.message}`));
+    if (err.hint) {
+      console.error(err.hint);
+    }
+  } else {
+    console.error(pc.red(`✖ Unexpected error: ${err.message}`));
+    if (process.env.DEBUG === '1') {
+      console.error(err.stack);
+    }
+    console.error('Run with DEBUG=1 for details, or open an issue.');
+  }
+  process.exitCode = 1;
+}
