@@ -1,13 +1,22 @@
 #!/usr/bin/env node
 
-import { Command } from 'commander';
-import pc from 'picocolors';
-import { ENV_PATH, APP_VERSION } from '../src/config.js';
-import { AppError } from '../src/errors.js';
-import { TYPES, STATUSES } from '../src/library.js';
-import { makeListParser } from '../src/exportOptions.js';
-import { login } from '../src/commands/login.js';
-import { exportCommand } from '../src/commands/export.js';
+const MIN_NODE_MAJOR = 22;
+const nodeMajor = Number(process.versions.node.split('.')[0]);
+if (nodeMajor < MIN_NODE_MAJOR) {
+  console.error(`simkl-export needs Node.js 22 or newer (you have ${process.version}).`);
+  process.exit(1);
+}
+
+// Static ESM imports run before any code above, so everything that needs the
+// Node version we just checked is loaded dynamically, after the check.
+const { Command } = await import('commander');
+const { default: pc } = await import('picocolors');
+const { ENV_PATH, APP_VERSION } = await import('../src/config.js');
+const { AppError } = await import('../src/errors.js');
+const { TYPES, STATUSES } = await import('../src/library.js');
+const { makeListParser } = await import('../src/exportOptions.js');
+const { login } = await import('../src/commands/login.js');
+const { exportCommand } = await import('../src/commands/export.js');
 
 const parseTypes = makeListParser(TYPES, { singular: 'type', plural: 'types' });
 const parseStatuses = makeListParser(STATUSES, { singular: 'status', plural: 'statuses' });
@@ -28,6 +37,12 @@ program
 program
   .command('login')
   .description('Connect your Simkl account (PIN code, one time)')
+  .addHelpText(
+    'after',
+    `
+Examples:
+  $ simkl-export login`,
+  )
   .action(async () => {
     await login();
   });
