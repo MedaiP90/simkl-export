@@ -4,6 +4,7 @@ import { Command } from 'commander';
 import pc from 'picocolors';
 import { ENV_PATH, APP_VERSION } from '../src/config.js';
 import { AppError } from '../src/errors.js';
+import { login } from '../src/commands/login.js';
 
 try {
   process.loadEnvFile(ENV_PATH);
@@ -20,9 +21,9 @@ program
 
 program
   .command('login')
-  .description('Connect your Simkl account (one time)')
-  .action(() => {
-    console.log('Not implemented yet.');
+  .description('Connect your Simkl account (PIN code, one time)')
+  .action(async () => {
+    await login();
   });
 
 program
