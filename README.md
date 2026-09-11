@@ -193,8 +193,6 @@ src/commands/export.js      `export` command: options, prompts, spinner, summary
 test/                        node:test files + fixtures
 ```
 
-The [`prompts/`](prompts/) folder has the original spec-by-spec plan this project was built from, starting at [`prompts/00-plan.md`](prompts/00-plan.md).
-
 ## Credits
 
 Data provided by [Simkl](https://simkl.com).
